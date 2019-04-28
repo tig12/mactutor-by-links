@@ -23,8 +23,8 @@ $raw = file_get_contents($index_page);
 preg_match_all('#<a href="(../Biographies/.*?.html)">#', $raw, $m);
 
 foreach($m[1] as $match){
-    $url = $BASE_URL . str_replace('..', '', $match);
-    $filename = str_replace('../Biographies/', '', $match);
+    $url = $BASE_URL . str_replace('..', '', clean_name($match));
+    $filename = str_replace('../Biographies/', '', clean_name($match));
     $fullpath = $dir_bios . DS . $filename;
     
     if(is_file($fullpath)){
@@ -35,7 +35,16 @@ foreach($m[1] as $match){
     
     echo "Retrieving $url\n";
     copy($url, $fullpath);
-    dosleep(3); // kepp cool with the server
+    dosleep(2); // kepp cool with the server
+}
+
+
+// ******************************************************
+/**
+    Fix problem of quote in name
+**/
+function clean_name($str){
+    return str_replace("'", '', $str); 
 }
 
 // ******************************************************

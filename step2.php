@@ -25,6 +25,7 @@ $files_bios = glob("$dir_bios/*.html");
 foreach($files_bios as $file_bio){
     // Extract birth place from biography
     // and download the page of this place
+    $file_bio = clean_name($file_bio);
     $raw = file_get_contents($file_bio);
     preg_match($p, $raw, $m);
 //echo "Parsing file $file_bio\n";
@@ -66,7 +67,15 @@ function clean_place($str){
         // happens for Rimavska Sobota
         $clean = str_replace(' ', '_', $str);
     }
-    return $clean;
+    return trim($clean);
+}
+
+// ******************************************************
+/**
+    Fix problem of quote in name
+**/
+function clean_name($str){
+    return str_replace("'", '', $str); 
 }
 
 // ******************************************************

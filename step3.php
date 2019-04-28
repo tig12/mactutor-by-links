@@ -49,13 +49,13 @@ foreach($files_bio as $file_bio){
     
     // name
     preg_match($pName, $raw, $m1);
-    $name = html_entity_decode($m1[1]);
+    $name = trim(html_entity_decode($m1[1]));
     
     // birth, death
     preg_match($pBirthDeath, $raw, $m2);
     if(count($m2) == 3){
-        $birth = html_entity_decode(trim(strip_tags($m2[1])));
-        $death = html_entity_decode(strip_tags($m2[2]));
+        $birth = trim(html_entity_decode(strip_tags($m2[1])));
+        $death = trim(html_entity_decode(strip_tags($m2[2])));
         [$bdate, $bplace] = compute_date($birth);
         [$ddate, $dplace] = compute_date($death);
         // Try to open page with birth place
@@ -98,6 +98,8 @@ foreach($files_bio as $file_bio){
         }
     }
     
+//if(trim($name) == ''){ echo "$key\n"; continue; }
+
     // fill current person
     // do field by field to avoid erasing NB_LINKS
     $results[$key]['NAME'] = $name;
@@ -107,12 +109,16 @@ foreach($files_bio as $file_bio){
     $results[$key]['B_LAT'] = $lat;
     $results[$key]['D_DATE'] = $ddate;
     $results[$key]['D_PLACE'] = $dplace;
-//echo "\n<pre>"; print_r($results); echo "</pre>\n"; exit;
-//break;
+
+    // particular cases
+    if($key == 'Bordoni.html'){
+        $results[$key]['B_PLACE'] = 'Mezzana Corti, now Cava Manara, Savoy, Italy';
+    }
 }
 
 $csv = implode(CSV_SEP, CSV_FIELDS) . "\n";
-foreach($results as $person){
+foreach($results as $key => $person){
+if(trim($person['NAME']) == ''){ echo "$key\n"; }
     $csv .= implode(CSV_SEP, $person) . "\n";
 }
 file_put_contents($config['result-csv'], $csv);
@@ -225,5 +231,5 @@ function clean_place($str){
         // happens for Rimavska Sobota
         $clean = str_replace(' ', '_', $str);
     }
-    return $clean;
+    return trim($clean);
 }

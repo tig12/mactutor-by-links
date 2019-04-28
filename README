@@ -8,9 +8,10 @@ Preparation :
 - Copy config.yml.dist to config.yml
 - Adapt the values to your machine
 
-Retrieve the biographies on your local machine :
+Retrieve pages containing the biographies and places on your local machine :
 php step1.php
 php step2.php
+Generate csv :
 php step3.php
 
 Execution result :
@@ -23,9 +24,37 @@ permits to retrieve birthplaces except for 166 mathematicians
 (1269 birthplaces)
 
 
-
-
 TODO
 - Possibility to retrieve wikipedia url from birth place => geonames id + country without ambiguity
 - Maybe replace ',' by other character in place names
+- Handle "now" in place names (place original and place now)
+- Make a class with utility functions
+
+BUGS
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Sharnbrook.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Wootton.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Stepps.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Shefong.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Stockbridge.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Obu.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Guadalajara.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Puzhou.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/New_Castle.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Antinoupolis.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Gifu.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Kisai.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Marosvasarhely.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Lewisville.html
+Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Donglai.html
+
+Lines with empty name :
+al-Kashi.html
+al-Haytham.html
+al-Khazin.html
+al-Banna.html
+Morgan.html
+Lane.html
+Rham.html
+Olubummo_Adegoke.html
+MacLaurin.html
 
