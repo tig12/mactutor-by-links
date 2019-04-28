@@ -38,6 +38,13 @@ $pLink = '#<a href="../Mathematicians/(.*?)"#';
 $results = [];
 
 $files_bio = glob($dir_bios . '/*');
+
+// to check the links
+$basenames_bio = [];
+foreach($files_bio as $tmp){
+    $basenames_bio[] = basename($tmp);
+}
+
 foreach($files_bio as $file_bio){
     
     $key = basename($file_bio); // ex "Aaboe.html"
@@ -91,6 +98,10 @@ foreach($files_bio as $file_bio){
     if(isset($m5[1])){
         $links = array_unique($m5[1]); // multiple links to the same person are counted for one
         foreach($links as $link){
+            $link = fix_broken_link($link);
+            if(!in_array($link, $basenames_bio)){
+                echo "Link $link does not correspond\n";
+            }
             if(!isset($results[$link])){
                 $results[$link] = newResultEntry();
             }
@@ -98,8 +109,6 @@ foreach($files_bio as $file_bio){
         }
     }
     
-//if(trim($name) == ''){ echo "$key\n"; continue; }
-
     // fill current person
     // do field by field to avoid erasing NB_LINKS
     $results[$key]['NAME'] = $name;
@@ -232,4 +241,18 @@ function clean_place($str){
         $clean = str_replace(' ', '_', $str);
     }
     return trim($clean);
+}
+
+// ******************************************************
+function fix_broken_link($link){
+    if($link == 'al-Kashi.html') $link = 'Al-Kashi.html';
+    else if($link == 'al-Haytham.html') $link = 'Al-Haytham.html';
+    else if($link == 'al-Khazin.html') $link = 'Al-Khazin.html';
+    else if($link == 'al-Banna.html') $link = 'Al-Banna.html';
+    else if($link == 'Morgan.html') $link = 'De_Morgan.html';
+    else if($link == 'Lane.html') $link = 'MacLane.html';
+    else if($link == 'Rham.html') $link = 'De_Rham.html';
+    else if($link == 'Olubummo_Adegoke.html') $link = 'Olubummo.html';
+    else if($link == 'MacLaurin.html') $link = 'Maclaurin.html';
+    return $link;
 }
