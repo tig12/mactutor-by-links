@@ -1,0 +1,13 @@
+
+
+# Full path to the list of mathematician pages by chronological order
+index-page: /path/to/mac-tutor-index/Full_Chron.html
+
+# Full path to the resulting file
+result-csv: /path/to/mac-tutor-index/mathematicians-mactutor.csv
+
+# Full paths where the html files will be stored locally
+directories:
+  bios: /path/to/mac-tutor-index/biographies
+  places: /path/to/mac-tutor-index/places
+  
