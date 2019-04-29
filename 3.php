@@ -58,9 +58,13 @@ foreach($files_bio as $file_bio){
         preg_match($pBirthPlace, $raw, $m3);
         if(count($m3) == 2){
             $file_place = MacTutor::clean_place($m3[1]);
+// @todo put the following code in Place.php
+//            [$lg, $lat, $wikipedia] = Place::getInfo($file_place);
+// /* 
             $fullpath_place = $dir_places . DS . $file_place;
             $raw2 = file_get_contents($fullpath_place);
             // longitude, latitude of birth place
+            $lg = $lat = '';
             preg_match($pLgLat, $raw2, $m4);
             if(count($m4) == 5){
                 $lg = Place::compute_lat($m4[1], $m4[2]);
@@ -68,8 +72,9 @@ foreach($files_bio as $file_bio){
             }
             else{
                 echo "Cannot parse $fullpath_place\n";
-                $lg = $lat = '';
             }
+            // wikipedia
+// */
         }
     }
     else{
@@ -114,12 +119,14 @@ foreach($files_bio as $file_bio){
     }
 }
 
+// generate csv
+
 $csv = implode(CSV::SEP, CSV::FIELDS) . "\n";
 foreach($results as $key => $person){
 if(trim($person['NAME']) == ''){ echo "$key\n"; }
     $csv .= implode(CSV::SEP, $person) . "\n";
 }
-file_put_contents(MacTutor::$config['result-csv'], $csv);
+file_put_contents(MacTutor::$config['result-csv'], $csv); // HERE write file
 echo "csv file stored in " . MacTutor::$config['result-csv'] . "\n";
     
 

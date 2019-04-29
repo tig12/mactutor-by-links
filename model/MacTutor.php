@@ -41,6 +41,7 @@ class MacTutor{
         return trim($str);
     }
     
+    /** REMOVE WHEN SURE **/
     public static function zzz_clean_place($str){
         $clean = $str;
         if(substr($str, 0, 1) == ' '){
@@ -58,7 +59,7 @@ class MacTutor{
     // ******************************************************
     /** 
         Equivalent to sleep(), but echoes a message ; seconds don't need to be integer
-        @param  $x  positive number ; seconds
+        @param  $x  positive number expressing seconds
     **/
     public static function dosleep($x){
         echo "  dosleep($x) ";

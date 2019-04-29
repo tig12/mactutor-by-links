@@ -9,6 +9,26 @@
 
 class Place{
     
+    
+    // ******************************************************
+    /**
+        @param $
+    **/
+    public static function getInfo($file_place){
+        $fullpath_place = $dir_places . DS . $file_place;
+        $raw2 = file_get_contents($fullpath_place);
+        // longitude, latitude of birth place
+        preg_match($pLgLat, $raw2, $m4);
+        if(count($m4) == 5){
+            $lg = Place::compute_lat($m4[1], $m4[2]);
+            $lat = Place::compute_lg($m4[3], $m4[4]);
+        }
+        else{
+            echo "Cannot parse $fullpath_place\n";
+            $lg = $lat = '';
+        }
+    }
+    
     // ******************************************************
     /**
         Computes longitude of a place page.

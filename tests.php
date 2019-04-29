@@ -7,21 +7,18 @@
     @history    2019-04-28 19:12:27+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
-require_once 'init.php';
-
-$yaml = file_get_contents('config.yml');
-$config = yaml_parse($yaml);
-$dir_places = $config['directories']['places'];
+require_once 'model/MacTutor.php';
 
 test_wikipedia();
 
 // ******************************************************
 /**
     Tests the nb of place pages with a link to wikipedia
+    Exec 2019-04-29 03:35:16+02:00 :
+    nb wikipedia : 1135 / 1273 : 89.16 % ok
 **/
 function test_wikipedia(){
-    global $config;
-    $dir_places = $config['directories']['places'];
+    $dir_places = MacTutor::$config['directories']['places'];
     $files_places = glob($dir_places . '/*');
     // stats
     $n_total = count($files_places);
@@ -36,8 +33,7 @@ function test_wikipedia(){
             $n_wiki++;
         }
     }
-    echo "total : $n_total\n";
-    echo "nb wikipedia : $n_wiki\n";
+    echo "nb wikipedia : $n_wiki / $n_total : ";
     $p = $n_wiki *100 / $n_total;
-    echo "$p % ok\n";
+    echo round($p, 2) . " % ok\n";
 }

@@ -2,8 +2,5 @@
 # files marked for deletion
 z.*
 
-# files to keep only in local
-1.*
-
 config.yml
 
