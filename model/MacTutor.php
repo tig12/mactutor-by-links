@@ -1,14 +1,15 @@
 <?php
 /******************************************************************************
 
-    Initialization and utilities for mac-tutor code.
+    Initializations and utilities for mac-tutor code.
+    
     @license    GPL
     @history    2019-04-29, Thierry Graff : Creation
 ********************************************************************************/
 
 define('DS', DIRECTORY_SEPARATOR);
 
-MacTutor::init(); // ??? I thought there was static initializer in php7
+MacTutor::init(); // ??? I thought there was static initializer since php7
 
 class MacTutor{
     

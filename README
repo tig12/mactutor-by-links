@@ -1,20 +1,35 @@
 
+Computes a csv filee containing a list of mathematicians with birth and death data.
+Each mathematician is associated with the number of links coming from other mathematician pages (N_LINKS).
+N_LINKS can serve as a celebrity indicator.
 
-Installation : 
+Installation
+------------
 Install PECL extension php-yaml :
 sudo apt install php-yaml
 
-Preparation :
+Preparation
+------------
 - Copy config.yml.dist to config.yml
-- Adapt the values to your machine
+- Adapt the paths to your local machine
 
-Retrieve pages containing the biographies and places on your local machine :
-php step1.php
-php step2.php
+
+Execution
+------------
+In a console, from current directory (containing this README) :
+
+Retrieve pages containing the biographies on your local machine :
+php run/step1.php
+
+Retrieve pages containing the places on your local machine :
+php run/step2.php
+
 Generate csv :
-php step3.php
+php run/step3.php
+
 
 Execution result :
+------------
 
 step 1
 permits to retrieve 2842 persons
@@ -23,14 +38,23 @@ step 2
 permits to retrieve birthplaces except for 166 mathematicians
 (1269 birthplaces)
 
+step 3
+see build/stats.php
+
+
+Examine result
+------------
+php build/stats.php
+
 
 TODO
+------------
 - Possibility to retrieve wikipedia url from birth place => geonames id + country without ambiguity
 - Maybe replace ',' by other character in place names
 - Handle "now" in place names (place original and place now)
-- Make a class with utility functions
 
 BUGS
+------------
 Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Sharnbrook.html
 Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Wootton.html
 Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Stepps.html

@@ -7,17 +7,17 @@
     @copyright  jetheme.org
     @history    2017-02-02 10:44:42+01:00, Thierry Graff : Creation
     @history    2017-03-18 19:25:11+01:00, Thierry Graff : replace old function (found at http://php.net/manual/en/function.str-getcsv.php)
-                                                           by new version because of memory overflow
+                                                                    by new version because of memory overflow
 
 ****************************************************************************************/
 class jth_csvAssociative{
-    
     
     /**
         Fills a csv file to an array of associative arrays
         The first line of the array is considered as the header, containing the field names
         @param      $filename Absolute path to the csv file
         @param      $delimiter field delimiter (one character only).
+        @return      false or associative array
     **/
     public static function csvAssociative($filename, $delimiter=';'){
         $lines = @file($filename, FILE_IGNORE_NEW_LINES);

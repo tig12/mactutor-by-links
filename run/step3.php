@@ -58,7 +58,7 @@ foreach($files_bio as $file_bio){
         preg_match($pBirthPlace, $raw, $m3);
         if(count($m3) == 2){
             $file_place = MacTutor::clean_place($m3[1]);
-// @todo put the following code in Place.php
+// @todo put the following code in Place.php and keep only the next line
 //            [$lg, $lat, $wikipedia] = Place::getInfo($file_place);
 // /* 
             $fullpath_place = $dir_places . DS . $file_place;
@@ -99,12 +99,12 @@ foreach($files_bio as $file_bio){
             if(!isset($results[$link])){
                 $results[$link] = newResultEntry();
             }
-            $results[$link]['NB_LINKS'] ++; // HERE increment celebrity count
+            $results[$link]['N_LINKS'] ++; // HERE increment celebrity count
         }
     }
     
     // fill current person
-    // do field by field to avoid erasing NB_LINKS
+    // do field by field to avoid erasing N_LINKS
     $results[$key]['NAME'] = $name;
     $results[$key]['B_DATE'] = $bdate;
     $results[$key]['B_PLACE'] = $bplace;
@@ -126,6 +126,7 @@ foreach($results as $key => $person){
 if(trim($person['NAME']) == ''){ echo "$key\n"; }
     $csv .= implode(CSV::SEP, $person) . "\n";
 }
+
 file_put_contents(MacTutor::$config['result-csv'], $csv); // HERE write file
 echo "csv file stored in " . MacTutor::$config['result-csv'] . "\n";
     
@@ -136,7 +137,7 @@ function newResultEntry(){
     foreach(CSV::FIELDS as $field){
         $new[$field] = '';
     }
-    $new['NB_LINKS'] = 0;
+    $new['N_LINKS'] = 0;
     return $new;
 }
 

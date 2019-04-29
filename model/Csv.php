@@ -14,7 +14,7 @@ class Csv{
     
     const FIELDS = [
         'NAME',
-        'NB_LINKS',
+        'N_LINKS',
         'B_DATE',
         'B_PLACE',
         'B_LG',
