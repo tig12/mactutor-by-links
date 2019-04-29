@@ -1,90 +1,55 @@
 <?php
 /******************************************************************************
-    Retrieves the pages containing birth places of mathematicians from Mac Tutor
-    (https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html)
-    This step uses the pages downloaded in step1 to compute the place (to limit calls to Mac Tutor server).
+    Extract birth places from biographies and download the pages of these places.
+    Uses the biographies downloaded in step1.
     
     @license    GPL
     @history    2019-04-28 08:36:21+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
-define('DS', DIRECTORY_SEPARATOR);
+require_once 'model/MacTutor.php';
+require_once 'model/Bio.php';
 
-$BASE_URL = 'https://www-history.mcs.st-andrews.ac.uk';
+$dir_bios = MacTutor::$config['directories']['bios'];
+$dir_places = MacTutor::$config['directories']['places'];
 
-
-$yaml = file_get_contents('config.yml');
-$config = yaml_parse($yaml);
-
-$dir_bios = $config['directories']['bios'];
-$dir_places = $config['directories']['places'];
-
-$p = '#<a href = "../BirthplaceMaps/(.*?.html)"><b>Show birthplace location</b></a>#';
 $files_bios = glob("$dir_bios/*.html");
 
+echo "Start place retrieval using biography files ...\n";
+
+$p = '#<a href = "../BirthplaceMaps/(.*?.html)"><b>Show birthplace location</b></a>#';
+
+$n_without_birth = 0;
 foreach($files_bios as $file_bio){
-    // Extract birth place from biography
-    // and download the page of this place
-    $file_bio = clean_name($file_bio);
+
+    $file_bio = Bio::clean_name($file_bio);
     $raw = file_get_contents($file_bio);
     preg_match($p, $raw, $m);
 //echo "Parsing file $file_bio\n";
     if(!isset($m[1])){
         // no birth place
-        echo "Unable to retrieve birth place in file $file_bio\n";
+        echo "Unable to retrieve birth place in file " . basename($file_bio) . "\n";
+        $n_without_birth++;
         continue;
         //echo $raw; exit;
     }
     // particular cases with white spaces
-    $m[1] = clean_place($m[1]);
+    $m[1] = MacTutor::clean_place($m[1]);
     
-    $url = $BASE_URL . '/BirthplaceMaps/' . $m[1];
+    $url = MacTutor::BASE_URL . '/BirthplaceMaps/' . $m[1];
     $fullpath = $dir_places . DS . $m[1];
     
     if(is_file($fullpath)){
         // if the file has already been retrieved
-        // Happens for places where several mathematicians are born
-        // This permits to execute file retrieval in several executions
+        // Happens when several mathematicians are born in the same place
+        // Also permits to perform file retrieval in several executions
         continue;
     }
     
     echo "Retrieving $url\n";
-    copy($url, $fullpath);
-    dosleep(2); // kepp cool with the server
+    copy($url, $fullpath); // HERE download file
+    MacTutor::dosleep(2); // kepp cool with the server
 }
 
-// ******************************************************
-/**
-    Fix problems of white space in place names
-**/
-function clean_place($str){
-    $clean = $str;
-    if(substr($str, 0, 1) == ' '){
-        // happens for New-York, Washington
-        $clean = substr($str, 1);
-    }
-    if(strpos($str, ' ') !==  false){
-        // happens for Rimavska Sobota
-        $clean = str_replace(' ', '_', $str);
-    }
-    return trim($clean);
-}
-
-// ******************************************************
-/**
-    Fix problem of quote in name
-**/
-function clean_name($str){
-    return str_replace("'", '', $str); 
-}
-
-// ******************************************************
-/** 
-    Equivalent to sleep(), but echoes a message and second number does not need to be integer
-    @param  $x  positive number ; seconds
-**/
-function dosleep($x){
-    echo "  dosleep($x) ";
-    usleep($x * 1000000);
-    echo " - end sleep\n";
-}
+echo "... Place retrieval finished\n";
+echo "$n_without_birth bios without birth place\n";

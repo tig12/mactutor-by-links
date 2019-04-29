@@ -1,30 +1,29 @@
 <?php
 /******************************************************************************
-    Retrieves the pages containing biographies of mathematicians from Mac Tutor
-    (https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html)
+    Retrieves the pages containing biographies of mathematicians on local machine
+    Uses https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html
     
     @license    GPL
     @history    2019-04-27 22:31:08+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
-define('DS', DIRECTORY_SEPARATOR);
+require_once 'model/MacTutor.php';
+require_once 'model/Bio.php';
 
-$BASE_URL = 'https://www-history.mcs.st-andrews.ac.uk';
 
-
-$yaml = file_get_contents('config.yml');
-$config = yaml_parse($yaml);
-$index_page = $config['index-page'];
-$dir_bios = $config['directories']['bios']; // directory containing the biographies
+$index_page = MacTutor::$config['index-page'];
+$dir_bios = MacTutor::$config['directories']['bios'];
 
 echo "Parsing $index_page\n";
 
 $raw = file_get_contents($index_page);
 preg_match_all('#<a href="(../Biographies/.*?.html)">#', $raw, $m);
 
+echo "Start biography retrieval...\n";
 foreach($m[1] as $match){
-    $url = $BASE_URL . str_replace('..', '', clean_name($match));
-    $filename = str_replace('../Biographies/', '', clean_name($match));
+    
+    $url = MacTutor::BASE_URL . str_replace('..', '', Bio::clean_name($match));
+    $filename = str_replace('../Biographies/', '', Bio::clean_name($match));
     $fullpath = $dir_bios . DS . $filename;
     
     if(is_file($fullpath)){
@@ -34,26 +33,9 @@ foreach($m[1] as $match){
     }
     
     echo "Retrieving $url\n";
-    copy($url, $fullpath);
-    dosleep(2); // kepp cool with the server
+    copy($url, $fullpath); // HERE download file
+    MacTutor::dosleep(2); // kepp cool with the server
 }
 
+echo "... Biography retrieval finished\n";
 
-// ******************************************************
-/**
-    Fix problem of quote in name
-**/
-function clean_name($str){
-    return str_replace("'", '', $str); 
-}
-
-// ******************************************************
-/** 
-    Equivalent to sleep(), but echoes a message and second number does not need to be integer
-    @param  $x  positive number ; seconds
-**/
-function dosleep($x){
-    echo "  dosleep($x) ";
-    usleep($x * 1000000);
-    echo " - end sleep\n";
-}

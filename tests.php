@@ -7,7 +7,7 @@
     @history    2019-04-28 19:12:27+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
-define('DS', DIRECTORY_SEPARATOR);
+require_once 'init.php';
 
 $yaml = file_get_contents('config.yml');
 $config = yaml_parse($yaml);
