@@ -45,7 +45,7 @@ class Bio{
                     - day in iso 8601 format YYYY-MM-DD
                     - place : string identical to the place in $str
     **/
-    public static function compute_date($str){
+    public static function compute_date_place($str){
         $months = [
             'January' => '01',
             'Jan' => '01',

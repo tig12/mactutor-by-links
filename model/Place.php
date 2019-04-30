@@ -12,21 +12,29 @@ class Place{
     
     // ******************************************************
     /**
-        @param $
+        @param  $file_place Relative path of a place file ; ex "Amiens.html"
+        @return  Array with 3 elements : longitude, latitude, wikipedia url
+                  If element(s) can't be computed, contain a empty string
     **/
-    public static function getInfo($file_place){
-        $fullpath_place = $dir_places . DS . $file_place;
-        $raw2 = file_get_contents($fullpath_place);
-        // longitude, latitude of birth place
-        preg_match($pLgLat, $raw2, $m4);
-        if(count($m4) == 5){
-            $lg = Place::compute_lat($m4[1], $m4[2]);
-            $lat = Place::compute_lg($m4[3], $m4[4]);
+    public static function get_infos($file_place){
+        $lg = $lat = $wikipedia = '';
+        $fullpath_place = MacTutor::$config['directories']['places'] . DS . $file_place;
+        $raw = file_get_contents($fullpath_place);
+        // longitude, latitude
+        $pLgLat = '@Its latitude and longitude are <b>(\d+)&#176;(\d+\'[N|S]) (\d+)&#176;(\d+\'[E|W])</b>@';
+        preg_match($pLgLat, $raw, $m1);
+        if(count($m1) == 5){
+            $lg = Place::compute_lat($m1[1], $m1[2]);
+            $lat = Place::compute_lg($m1[3], $m1[4]);
         }
-        else{
-            echo "Cannot parse $fullpath_place\n";
-            $lg = $lat = '';
+        // wikipedia
+        $pWikipedia ='@<a href=(https://en.wikipedia.org/wiki/.*?) @';
+        preg_match($pWikipedia, $raw, $m2);
+        
+        if(count($m2) == 2){
+            $wikipedia = $m2[1];
         }
+        return [$lg, $lat, $wikipedia];
     }
     
     // ******************************************************

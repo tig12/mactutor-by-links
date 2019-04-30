@@ -19,6 +19,7 @@ class Csv{
         'B_PLACE',
         'B_LG',
         'B_LAT',
+        'B_WIKIPEDIA',
         'D_DATE',
         'D_PLACE',
     ];
