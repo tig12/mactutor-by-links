@@ -6,6 +6,10 @@ index-page: /path/to/mac-tutor-index/Full_Chron.html
 # Full path to the resulting file
 result-csv: /path/to/mac-tutor-index/mathematicians-mactutor.csv
 
+# Indicates if the entries without birth date should be eliminated
+# possible values : true or false
+keep-only-dates: true
+
 # Full paths where the html files will be stored locally
 directories:
   bios: /path/to/mac-tutor-index/biographies

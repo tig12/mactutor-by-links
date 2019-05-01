@@ -69,7 +69,7 @@ class Bio{
         preg_match($p1, $str, $m);
         if(count($m) == 5){
             $day = $m[3] . '-' . $months[$m[2]] . '-' . str_pad($m[1], 2, '0', STR_PAD_LEFT);
-            $place = $m[4];
+            $place = trim($m[4]);
         }
         else{
             $day = $place = '';

@@ -9,10 +9,19 @@
 
 class Csv{
     
-    // could be in config
+    /** 
+        Separator in the generated csv file.
+        Could be in config.
+    **/
     const SEP = ';';
     
+    /** 
+        Fields in the generated csv file.
+    **/
     const FIELDS = [
+        # MacTutor id, corresponds to P1563 in wikidata.org
+        # For example Godel.html has id Godel
+        'ID',
         'NAME',
         'N_LINKS',
         'B_DATE',

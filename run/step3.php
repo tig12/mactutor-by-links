@@ -91,6 +91,7 @@ foreach($files_bio as $file_bio){
     
     // fill current person
     // do field by field to avoid erasing N_LINKS
+    $results[$key]['ID'] = substr($key, 0, -5);
     $results[$key]['NAME'] = $name;
     $results[$key]['B_DATE'] = $bdate;
     $results[$key]['B_PLACE'] = $bplace;
@@ -112,6 +113,9 @@ $results = array_reverse(jth_sortByKey::sortByKey($results, 'N_LINKS'));
 
 $csv = implode(CSV::SEP, CSV::FIELDS) . "\n";
 foreach($results as $person){
+    if( $person['B_DATE'] == '' && MacTutor::$config['keep-only-dates']){
+        continue;
+    }
     $csv .= implode(CSV::SEP, $person) . "\n";
 }
 
