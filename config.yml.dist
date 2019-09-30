@@ -9,9 +9,8 @@ directories:
   places: /path/to/directory/mactutor-places
 
 # Full path to the resulting file
-result-csv: /path/to/mac-tutor-index/mactutor-mathematicians.csv
+result-csv: /path/to/mac-tutor-index/mactutor-by-links.csv
 
 # Indicates if the entries without birth date should be eliminated
 # possible values : true or false
 keep-only-dates: true
-

@@ -11,7 +11,6 @@ require_once 'model/Csv.php';
 
 numbers();
 
-
 // ******************************************************
 /**
 Result of execution 2019-04-29 :
@@ -25,7 +24,7 @@ death date = 2318
 
 **/
 function numbers(){
-    require_once 'lib/jth_csvAssociative.php';
+    require_once 'vendor/jth_csvAssociative.php';
     $csv = jth_csvAssociative::csvAssociative(MacTutor::$config['result-csv'], Csv::SEP);
     
     $nTotal = count($csv);

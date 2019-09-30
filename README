@@ -1,12 +1,24 @@
 
-Computes a csv filee containing a list of mathematicians with birth and death data.
-Each mathematician is associated with the number of links coming from other mathematician pages (N_LINKS).
-N_LINKS can serve as a celebrity indicator.
+Builds a list of mathematicians from MacTutor index.
+This list is sorted by inter-page links (= nb of A HREF links pointing to a page).
+
+Code released under the General Public Licence (GPL)
+Written in PHP 7.2
+Tested on Linux Ubuntu 18.4
+
+Departure URL :
+https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html
+
+Result :
+https://larzac.info/gauquelin5/eminence/mathematicians/mactutor-by-links.csv
+See details below
+
 
 Installation
 ------------
 Install PECL extension php-yaml :
 sudo apt install php-yaml
+
 
 Preparation
 ------------
@@ -47,26 +59,44 @@ Examine result
 php build/stats.php
 
 
+Result :
+------------
+To open the resulting csv file, use ";" as separator. Do not use "," because some fields contain comas.
+ID : MacTutor id
+NAME : full name, as written in MacTutor site
+N_LINKS : number of links pointing to a mathematician's page (inter-page links).
+B_DATE : birth date, YYYY-MM-DD
+B_PLACE : birth place, as written in MacTutor site
+B_LG : longitude of birth place, in decimal degrees
+B_LAT : latitude of birth place, in decimal degrees
+B_WIKIPEDIA : Wikipedia url corresponding to birth place
+D_DATE : death date, YYYY-MM-DD
+D_PLACE : death place
+
+Note : the field N_LINKS of a mathematician is the number of links pointing from other mathematicians' pages to the page of that mathematician.
+
+
 TODO
 ------------
-- Possibility to retrieve wikipedia url from birth place => geonames id + country without ambiguity
-- Maybe replace ',' by other character in place names
-- Handle "now" in place names (place original and place now)
+- Possibility to retrieve wikipedia url from birth place => compute geonames id + country without ambiguity
+
+- Handle "now" in place names : possible to compute original place name and original place name
+
 
 BUGS
 ------------
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Sharnbrook.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Wootton.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Stepps.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Shefong.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Stockbridge.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Obu.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Guadalajara.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Puzhou.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/New_Castle.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Antinoupolis.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Gifu.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Kisai.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Marosvasarhely.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Lewisville.html
-Cannot parse /home/thierry/share/maths/mac-tutor-index/places/Donglai.html
+Cannot get coordinates for Sharnbrook.html
+Cannot get coordinates for Wootton.html
+Cannot get coordinates for Stepps.html
+Cannot get coordinates for Shefong.html
+Cannot get coordinates for Stockbridge.html
+Cannot get coordinates for Obu.html
+Cannot get coordinates for Guadalajara.html
+Cannot get coordinates for Puzhou.html
+Cannot get coordinates for New_Castle.html
+Cannot get coordinates for Antinoupolis.html
+Cannot get coordinates for Gifu.html
+Cannot get coordinates for Kisai.html
+Cannot get coordinates for Marosvasarhely.html
+Cannot get coordinates for Lewisville.html
+Cannot get coordinates for Donglai.html

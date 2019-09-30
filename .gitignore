@@ -1,6 +1,8 @@
 
+config.yml
+
 # files marked for deletion
 z.*
 
-config.yml
-
+# local files
+1.admin

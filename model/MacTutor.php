@@ -42,20 +42,6 @@ class MacTutor{
         return trim($str);
     }
     
-    /** REMOVE WHEN SURE **/
-    public static function zzz_clean_place($str){
-        $clean = $str;
-        if(substr($str, 0, 1) == ' '){
-            // happens for New-York, Washington
-            $clean = substr($str, 1);
-        }
-        else if(strpos($str, ' ') !==  false){
-            // happens for Rimavska Sobota
-            $clean = str_replace(' ', '_', $str);
-        }
-        return trim($clean);
-    }
-    
     
     // ******************************************************
     /** 

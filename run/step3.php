@@ -12,7 +12,7 @@ require_once 'model/MacTutor.php';
 require_once 'model/Bio.php';
 require_once 'model/Place.php';
 require_once 'model/Csv.php';
-require_once 'lib/jth_sortByKey.php';
+require_once 'vendor/jth_sortByKey.php';
 
 $dir_bios = MacTutor::$config['directories']['bios'];
 $dir_places = MacTutor::$config['directories']['places'];
