@@ -80,7 +80,7 @@ TODO
 ------------
 - Possibility to retrieve wikipedia url from birth place => compute geonames id + country without ambiguity
 
-- Handle "now" in place names : possible to compute original place name and original place name
+- Handle "now" in MacTutor place names : possible to compute original place name and present place name
 
 
 BUGS

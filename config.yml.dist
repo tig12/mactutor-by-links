@@ -13,4 +13,4 @@ result-csv: /path/to/mac-tutor-index/mactutor-by-links.csv
 
 # Indicates if the entries without birth date should be eliminated
 # possible values : true or false
-keep-only-dates: true
+keep-only-dates: false
