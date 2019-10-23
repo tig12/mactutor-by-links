@@ -1,17 +1,23 @@
 
 Builds a list of mathematicians from MacTutor index.
-This list is sorted by inter-page links (= nb of A HREF links pointing to a page).
+This list is sorted by link count (link count of a mathematician
+is the number of links pointing from other mathematicians' pages
+to the page of that mathematician).
+
+Executed once in 2019-04 to build an eminence indicator for an other program :
+https://github.com/tig12/gauquelin5
 
 Code released under the General Public Licence (GPL)
-Written in PHP 7.2
-Tested on Linux Ubuntu 18.4
+Written in PHP 7.2; tested on Linux Ubuntu 18.4
+
+------------
 
 Departure URL :
 https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html
 
 Result :
 https://larzac.info/gauquelin5/eminence/mathematicians/mactutor-by-links.csv
-See details below
+See details of this file below
 
 
 Installation
@@ -59,21 +65,21 @@ Examine result
 php build/stats.php
 
 
-Result :
+Result
 ------------
+https://larzac.info/gauquelin5/eminence/mathematicians/mactutor-by-links.csv
 To open the resulting csv file, use ";" as separator. Do not use "," because some fields contain comas.
-ID : MacTutor id
-NAME : full name, as written in MacTutor site
-N_LINKS : number of links pointing to a mathematician's page (inter-page links).
-B_DATE : birth date, YYYY-MM-DD
-B_PLACE : birth place, as written in MacTutor site
-B_LG : longitude of birth place, in decimal degrees
-B_LAT : latitude of birth place, in decimal degrees
-B_WIKIPEDIA : Wikipedia url corresponding to birth place
-D_DATE : death date, YYYY-MM-DD
-D_PLACE : death place
 
-Note : the field N_LINKS of a mathematician is the number of links pointing from other mathematicians' pages to the page of that mathematician.
+ID      : MacTutor id
+NAME    : full name, as written in MacTutor site
+N_LINKS : number of links pointing to a mathematician's page (link count).
+B_DATE  : birth date, YYYY-MM-DD
+B_PLACE : birth place, as written in MacTutor site
+B_LG    : longitude of birth place, in decimal degrees
+B_LAT   : latitude of birth place, in decimal degrees
+B_WIKIPEDIA : Wikipedia url corresponding to birth place
+D_DATE  : death date, YYYY-MM-DD
+D_PLACE : death place
 
 
 TODO
