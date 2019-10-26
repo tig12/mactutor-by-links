@@ -1,16 +1,28 @@
 
 
-# Full path to the list of mathematician pages by chronological order
-index-page: /path/to/mac-tutor-index/mactutor-Full_Chron.html
-
 # Full paths where the html files will be stored locally
+# and where the csv files are stored
+
 directories:
-  bios: /path/to/directory/mactutor-biographies
-  places: /path/to/directory/mactutor-places
+  mactutor: /path/to/mactutor
+  bios:     /path/to/mactutor/bios
+  places:   /path/to/mactutor/places
+  honours:  /path/to/mactutor/honours
+
+######### put in commands:bylinks #########
+
+# Full path to the list of mathematician pages by chronological order
+index-page: /path/to/mactutor/mactutor-Full_Chron.html
 
 # Full path to the resulting file
-result-csv: /path/to/mac-tutor-index/mactutor-by-links.csv
+result-csv: /path/to/mactutor/mactutor-by-links.csv
 
 # Indicates if the entries without birth date should be eliminated
 # possible values : true or false
 keep-only-dates: false
+
+
+commands:
+  honours:
+    # https://www-history.mcs.st-andrews.ac.uk/Honours/index.html
+    start-page: /path/to/mactutor/mactutor-Honours.html

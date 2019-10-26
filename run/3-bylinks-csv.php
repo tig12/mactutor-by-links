@@ -1,9 +1,7 @@
 <?php
 /******************************************************************************
-    Creates a csv file using informations retrieved in steps 1 and 2
-    This file contains mathematicians with infos about birth / death
-    and the nb of links towards each of them.
-    
+    Generates mactutor-by-links.csv, MacTutor mathematicians sorted by link count
+
     @license    GPL
     @history    2019-04-27 23:28:35+02:00, Thierry Graff : Creation
 ********************************************************************************/
@@ -17,12 +15,11 @@ require_once 'vendor/jth_sortByKey.php';
 $dir_bios = MacTutor::$config['directories']['bios'];
 $dir_places = MacTutor::$config['directories']['places'];
 
-// prepare patterns
 $pName = '#<h1>(.*?)</h1>#';
 $pBirthDeath = '#<h3>Born:(.*?)Died:(.*?)</h3>#sm';
-$pLink = '#<a href="../Mathematicians/(.*?).html"#'; // links to other mathematicians
+//$pLink = '#<a href="../Mathematicians/(.*?).html"#';
+$pLink = '#<a href="../Mathematicians/(.*?)"#'; // links to other mathematicians
 $pBirthPlace = '#<a href = "../BirthplaceMaps/(.*?.html)"><b>Show birthplace location</b></a>#';
-$pLink = '#<a href="../Mathematicians/(.*?)"#';
 
 $results = [];
 

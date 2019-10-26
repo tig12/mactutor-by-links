@@ -4,7 +4,8 @@ This list is sorted by link count (link count of a mathematician
 is the number of links pointing from other mathematicians' pages
 to the page of that mathematician).
 
-Executed once in 2019-04 to build an eminence indicator for an other program :
+Executed once 2019-10-21 and 22
+to build an eminence indicator for an other program :
 https://github.com/tig12/gauquelin5
 
 Code released under the General Public Licence (GPL)
@@ -37,7 +38,7 @@ Execution
 In a console, from current directory (containing this README) :
 
 Retrieve pages containing the biographies on your local machine :
-php run/step1.php
+php run/1-get-bios.php
 
 Retrieve pages containing the places on your local machine :
 php run/step2.php
