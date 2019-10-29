@@ -1,9 +1,7 @@
 <?php
 /******************************************************************************
-    Creates a csv file using informations retrieved in steps 1 and 2
-    This file contains mathematicians with infos about birth / death
-    and the nb of links towards each of them.
-    
+    Generates file mactutor-honours.csv - List of the honours found on MacTutor
+
     @license    GPL
     @history    2019-10-26 22:19:52+02:00, Thierry Graff : Creation
 ********************************************************************************/

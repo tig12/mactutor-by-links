@@ -41,10 +41,10 @@ Retrieve pages containing the biographies on your local machine :
 php run/1-get-bios.php
 
 Retrieve pages containing the places on your local machine :
-php run/step2.php
+php run/2-get-places.php
 
 Generate csv :
-php run/step3.php
+php run/3-bylinks-csv.php
 
 
 Execution result :
