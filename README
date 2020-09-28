@@ -13,12 +13,11 @@ Written in PHP 7.2; tested on Linux Ubuntu 18.4
 
 ------------
 
-Departure URL :
+Departure URL to build the list :
 https://www-history.mcs.st-andrews.ac.uk/Indexes/Full_Chron.html
 
-Result :
-https://larzac.info/gauquelin5/eminence/mathematicians/mactutor-by-links.csv
-See details of this file below
+Result of program execution can be downloaded from :
+https://g5.tig12.net/auxiliary/maths/mactutor/
 
 
 Installation
@@ -68,7 +67,7 @@ php build/stats.php
 
 Result
 ------------
-https://larzac.info/gauquelin5/eminence/mathematicians/mactutor-by-links.csv
+https://g5.tig12.net/auxiliary/maths/mactutor/mactutor-by-links.csv.zip
 To open the resulting csv file, use ";" as separator. Do not use "," because some fields contain comas.
 
 ID      : MacTutor id
